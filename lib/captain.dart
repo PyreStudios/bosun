@@ -9,7 +9,7 @@ import 'package:captain/src/command_parser.dart';
 
 export 'src/command.dart';
 
-void mount(CaptainCommand command, List<String> args) {
+void execute(CaptainCommand command, List<String> args) {
   CommandExecutor.execute(CommandParser.parse(command, args));
 }
 

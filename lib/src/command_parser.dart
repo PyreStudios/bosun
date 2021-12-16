@@ -10,8 +10,9 @@ class CommandParser {
     var arguments = <String>[];
     var index = 0;
     for (var cmd in subcommands) {
+      // If no more subcommands then the rest must be args
       if (finalCmd.subcommands == null) {
-        arguments.addAll(subcommands.toList().sublist(index + 0));
+        arguments.addAll(subcommands.toList().sublist(index));
         break;
       }
 

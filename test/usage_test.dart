@@ -7,6 +7,7 @@ class AppCmd extends Command {
   @override
   void run(List<String> args, Map<String, dynamic> flags) {
     print("IN APP");
+    print(args);
   }
 }
 
@@ -27,7 +28,10 @@ void main() {
   group('Generic example', () {
     test('Supports basic example', () {
       var args = 'donker run app --bar=baz'.split(' ');
-      mount(CaptainCommand('donker', subcommands: [RunCmd()]), args);
+      execute(CaptainCommand('donker', subcommands: [RunCmd()]), args);
+
+      var args2 = 'donker run app nested --bar=baz'.split(' ');
+      execute(CaptainCommand('donker', subcommands: [RunCmd()]), args2);
     });
   });
 }

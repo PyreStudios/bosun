@@ -42,7 +42,7 @@ class RunCmd extends Command {
 }
 
 void main(List<String> args) {
-  mount(CaptainCommand('donker', subcommands: [RunCmd()]), args);
+  execute(CaptainCommand('donker', subcommands: [RunCmd()]), args);
 }
 
 ```
