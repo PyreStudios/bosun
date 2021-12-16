@@ -22,8 +22,9 @@ void main() {
       expect(outCmd.flags['quuz'], equals('corge'));
       expect(outCmd.command.command, equals('bar'));
       print(outCmd.args);
-      expect(outCmd.args.length, equals(1));
-      expect(outCmd.args[0], equals('turkey'));
+      expect(outCmd.args.length, equals(2));
+      expect(outCmd.args[0], equals('bar'));
+      expect(outCmd.args[1], equals('turkey'));
     });
   });
 }
