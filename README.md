@@ -1,39 +1,48 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Captain
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## A library for parsing CLI input and structuring CLI commands
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
+- Structure CLI commands in a nice, uniform fashion.
+- Parse args and flag information from a command tree.
+- [EVENTUALLY] auto generate meaningful output when nonsensical commands are ran.
+- [EVENTUALLY] meaningful feature suggestions from **you**!
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add Captain to your dependencies. See example for more information. Additional information coming soon.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Captain is simple to use! You'll leverage Captain's Command class to structure your own commands. Additionally, you'll new up **one** CaptainCommand and pass arguments to it. This is usually done directly in your main method, but doesnt have to be.
 
 ```dart
-const like = 'sample';
+import 'package:captain/captain.dart';
+
+class AppCmd extends Command {
+  AppCmd() : super(command: 'app', description: 'run as an app shell');
+
+  @override
+  void run(List<String> args, Map<String, dynamic> flags) {
+    print("in the app command callback");
+  }
+}
+
+class RunCmd extends Command {
+  RunCmd()
+      : super(
+            command: 'run',
+            description: 'Run a command in a shell',
+            subcommands: [AppCmd()]);
+
+  @override
+  void run(List<String> args, Map<String, dynamic> flags) {
+    print("in the run command callback");
+  }
+}
+
+void main(List<String> args) {
+  mount(CaptainCommand('donker', subcommands: [RunCmd()]), args);
+}
+
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
