@@ -1,7 +1,7 @@
-name: captain
+name: bosun
 description: A library for parsing CLI input and structuring CLI commands
 version: 0.0.1
-repository: https://www.github.com/pyrestudios/captain
+repository: https://www.github.com/pyrestudios/bosun
 # homepage: https://www.example.com
 
 environment:

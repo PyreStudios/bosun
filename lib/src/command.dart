@@ -33,8 +33,8 @@ abstract class Command {
   }
 }
 
-class CaptainCommand extends Command {
-  CaptainCommand(String appName, {required List<Command> subcommands})
+class BosunCommand extends Command {
+  BosunCommand(String appName, {required List<Command> subcommands})
       : super(command: appName, subcommands: subcommands);
 
   @override

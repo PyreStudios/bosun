@@ -1,4 +1,4 @@
-# Captain
+# Bosun
 
 ## A library for parsing CLI input and structuring CLI commands
 
@@ -10,14 +10,14 @@
 - [EVENTUALLY] meaningful feature suggestions from **you**!
 ## Getting started
 
-Add Captain to your dependencies. See example for more information. Additional information coming soon.
+Add Bosun to your dependencies. See example for more information. Additional information coming soon.
 
 ## Usage
 
-Captain is simple to use! You'll leverage Captain's Command class to structure your own commands. Additionally, you'll new up **one** CaptainCommand and pass arguments to it. This is usually done directly in your main method, but doesnt have to be.
+Bosun is simple to use! You'll leverage Bosun's Command class to structure your own commands. Additionally, you'll new up **one** BosunCommand and pass arguments to it. This is usually done directly in your main method, but doesnt have to be.
 
 ```dart
-import 'package:captain/captain.dart';
+import 'package:bosun/bosun.dart';
 
 class AppCmd extends Command {
   AppCmd() : super(command: 'app', description: 'run as an app shell');
@@ -42,7 +42,7 @@ class RunCmd extends Command {
 }
 
 void main(List<String> args) {
-  execute(CaptainCommand('donker', subcommands: [RunCmd()]), args);
+  execute(BosunCommand('donker', subcommands: [RunCmd()]), args);
 }
 
 ```

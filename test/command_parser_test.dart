@@ -1,7 +1,7 @@
-import 'package:captain/captain.dart';
-import 'package:captain/src/command.dart';
+import 'package:bosun/bosun.dart';
+import 'package:bosun/src/command.dart';
 import 'package:test/test.dart';
-import 'package:captain/src/command_parser.dart';
+import 'package:bosun/src/command_parser.dart';
 
 class RootCmd extends Command {
   RootCmd() : super(command: 'bar');

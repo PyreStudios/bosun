@@ -1,5 +1,5 @@
-import 'package:captain/src/command_executor.dart';
-import 'package:captain/src/command.dart';
+import 'package:bosun/src/command_executor.dart';
+import 'package:bosun/src/command.dart';
 
 class CommandParser {
   static ProcessableCommand parse(Command command, List<String> args) {

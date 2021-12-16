@@ -1,15 +1,15 @@
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
-library captain;
+library bosun;
 
-import 'package:captain/src/command.dart';
-import 'package:captain/src/command_executor.dart';
-import 'package:captain/src/command_parser.dart';
+import 'package:bosun/src/command.dart';
+import 'package:bosun/src/command_executor.dart';
+import 'package:bosun/src/command_parser.dart';
 
 export 'src/command.dart';
 
-void execute(CaptainCommand command, List<String> args) {
+void execute(BosunCommand command, List<String> args) {
   CommandExecutor.execute(CommandParser.parse(command, args));
 }
 

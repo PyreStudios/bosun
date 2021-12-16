@@ -1,4 +1,4 @@
-import 'package:captain/captain.dart';
+import 'package:bosun/bosun.dart';
 
 class AppCmd extends Command {
   AppCmd() : super(command: 'app', description: 'run as an app shell');
@@ -23,5 +23,5 @@ class RunCmd extends Command {
 }
 
 void main(List<String> args) {
-  execute(CaptainCommand('donker', subcommands: [RunCmd()]), args);
+  execute(BosunCommand('donker', subcommands: [RunCmd()]), args);
 }

@@ -1,4 +1,4 @@
-import 'package:captain/captain.dart';
+import 'package:bosun/bosun.dart';
 import 'package:test/test.dart';
 
 class AppCmd extends Command {
@@ -28,10 +28,10 @@ void main() {
   group('Generic example', () {
     test('Supports basic example', () {
       var args = 'donker run app --bar=baz'.split(' ');
-      execute(CaptainCommand('donker', subcommands: [RunCmd()]), args);
+      execute(BosunCommand('donker', subcommands: [RunCmd()]), args);
 
       var args2 = 'donker run app nested --bar=baz'.split(' ');
-      execute(CaptainCommand('donker', subcommands: [RunCmd()]), args2);
+      execute(BosunCommand('donker', subcommands: [RunCmd()]), args2);
     });
   });
 }
