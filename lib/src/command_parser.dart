@@ -1,5 +1,6 @@
 import 'package:bosun/src/command_executor.dart';
 import 'package:bosun/src/command.dart';
+import 'package:bosun/src/commands.dart';
 
 class CommandParser {
   static ProcessableCommand parse(Command command, List<String> args) {
@@ -19,10 +20,16 @@ class CommandParser {
       index++;
 
       finalCmd = finalCmd.subcommands!
-          .firstWhere((element) => element.getAllLogicalNames().contains(cmd));
+          .firstWhere((element) => element.getAllLogicalNames().contains(cmd), orElse: () => _exceptionHandler(finalCmd, cmd));
     }
 
     return ProcessableCommand(finalCmd, flags, arguments);
+  }
+
+  static Command _exceptionHandler(Command command, String subcommand) {
+    var bosunCommand = BosunCmd(command);
+    // Eventually we will inspect the arguments here to see if we can suggest a command
+    return bosunCommand.subcommands!.firstWhere((element) => element.getAllLogicalNames().contains(subcommand), orElse: () => HelpCmd(command));
   }
 
   static Map<String, dynamic> _getFlags(List<String> args) {
