@@ -5,7 +5,7 @@ class CommandParser {
   static ProcessableCommand parse(Command command, List<String> args) {
     Map<String, dynamic> flags = _getFlags(args);
     var subcommands =
-        args.sublist(1).where((element) => !element.startsWith('-'));
+        args.sublist(0).where((element) => !element.startsWith('-'));
     var finalCmd = command;
     var arguments = <String>[];
     var index = 0;

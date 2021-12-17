@@ -10,7 +10,7 @@ import 'package:bosun/src/command_parser.dart';
 export 'src/command.dart';
 
 void execute(BosunCommand command, List<String> args) {
-  CommandExecutor.execute(CommandParser.parse(command, args));
+  // We dont really care what the app's name is
+  final argsWithoutRoot = args.sublist(1);
+  CommandExecutor.execute(CommandParser.parse(command, argsWithoutRoot));
 }
-
-// TODO: Export any libraries intended for clients of this package.

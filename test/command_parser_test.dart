@@ -16,7 +16,7 @@ void main() {
   group('Flag Parsing', () {
     test('Should handle basic tags', () {
       var outCmd = CommandParser.parse(
-          RootCmd(), 'foo bar turkey -baz -qux=quux --quuz=corge'.split(' '));
+          RootCmd(), 'bar turkey -baz -qux=quux --quuz=corge'.split(' '));
       expect(outCmd.flags['baz'], isTrue);
       expect(outCmd.flags['qux'], equals('quux'));
       expect(outCmd.flags['quuz'], equals('corge'));
