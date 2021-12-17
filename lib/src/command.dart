@@ -34,8 +34,8 @@ abstract class Command {
 }
 
 class BosunCommand extends Command {
-  BosunCommand(String appName, {required List<Command> subcommands})
-      : super(command: appName, subcommands: subcommands);
+  BosunCommand(String appName, {String description = '', required List<Command> subcommands})
+      : super(command: appName, description: description, subcommands: subcommands);
 
   @override
   void run(List<String> args, Map<String, dynamic> flags) {

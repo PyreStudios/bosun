@@ -1,9 +1,10 @@
 import 'package:bosun/bosun.dart';
 
 class HelpCmd extends Command {
+  final Command root;
   final Command context;
 
-  HelpCmd(this.context)
+  HelpCmd(this.root, this.context)
       : super(
             command: 'help',
             description: 'Displays helpful information about the current project',
@@ -12,11 +13,11 @@ class HelpCmd extends Command {
   @override
   void run(List<String> args, Map<String, dynamic> flags) {
     String commands = '';
-    for (var element in [...context.subcommands!, ...BosunCmd(context).subcommands!]) {
+    for (var element in [...context.subcommands!, ...BosunCmd(root, context).subcommands!]) {
       commands += '  ${element.command}\t${element.description ?? ''}\n';
     }
     print('''
-A command-line utility for Dart CLI development.
+${root.description}
 
 Usage: <command|dart-file> [arguments]
 
@@ -26,19 +27,19 @@ Global options:
 Available commands:
 $commands
 Run "<command|dart-file> help" for more information about a command.
-See https://github.com/PyreStudios/bosun for detailed documentation.
       ''');
   }
 }
 
 class BosunCmd extends Command {
+  final Command root;
   final Command context;
 
-  BosunCmd(this.context)
+  BosunCmd(this.root, this.context)
       : super(
             command: 'bosun',
             description: 'Run a command in a shell',
-            subcommands: [HelpCmd(context)]);
+            subcommands: [HelpCmd(root, context)]);
 
   @override
   void run(List<String> args, Map<String, dynamic> flags) {
