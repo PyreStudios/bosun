@@ -28,8 +28,12 @@ abstract class Command {
   printHelp() {
     print('''
     $command ${use ?? ''} ${aliases?.join('|') ?? ''}
-    ${example ?? ''}
-    ${example ?? ''}''');
+
+    ${description ?? ''}
+    
+    example:
+      ${example ?? ''}
+    ''');
   }
 }
 

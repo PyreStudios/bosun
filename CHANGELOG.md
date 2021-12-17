@@ -1,3 +1,6 @@
+## 0.0.4
+Fix an issue where commands were double printing the example as their help text instead of the example and the description.
+
 ## 0.0.3
 Revert part of the changes in 0.0.2. Bosun shouldn't care assume that you pass the app name as an arg.
 
