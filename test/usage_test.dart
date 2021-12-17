@@ -27,10 +27,10 @@ class RunCmd extends Command {
 void main() {
   group('Generic example', () {
     test('Supports basic example', () {
-      var args = 'donker run app --bar=baz'.split(' ');
+      var args = 'run app --bar=baz'.split(' ');
       execute(BosunCommand('donker', subcommands: [RunCmd()]), args);
 
-      var args2 = 'donker run app nested --bar=baz'.split(' ');
+      var args2 = 'run app nested --bar=baz'.split(' ');
       execute(BosunCommand('donker', subcommands: [RunCmd()]), args2);
     });
   });
