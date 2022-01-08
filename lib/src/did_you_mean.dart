@@ -10,6 +10,10 @@ class _WordSimilarity {
   const _WordSimilarity(this.text, this.similarity);
 }
 
+/// didYouMean is a function that takes a BosunCommand and a string and returns
+/// the word in the command tree that is most similar to the string.
+/// We factor in all logical names for any given command so aliases and shorthands
+/// are considered, too!
 String didYouMean(String text, BosunCommand command) {
   var suggestions = [];
   traverseTree(command, (Command cmd) => cmd.subcommands ?? <Command>[],
@@ -18,16 +22,16 @@ String didYouMean(String text, BosunCommand command) {
     return true;
   });
 
-  print(suggestions);
-  var similarities =
-      suggestions.map((e) => _WordSimilarity(e, similarity(text, e))).toList();
+  var similarities = suggestions
+      .map((e) => _WordSimilarity(e, _calcSimilarity(text, e)))
+      .toList();
   similarities.sort((a, b) => b.similarity.compareTo(a.similarity));
   return similarities.first.text;
 }
 
-int levenshtein(String a, String b) {
-  a = a.toUpperCase();
-  b = b.toUpperCase();
+/// Find the levenshtein distance between two strings.
+/// https://en.wikipedia.org/wiki/Levenshtein_distance
+int _distanceBetweenStrings(String a, String b) {
   int i, j, cost, min1, min2, min3;
   int levenshtein;
   List<List<int>> d =
@@ -63,10 +67,11 @@ int levenshtein(String a, String b) {
   return (levenshtein);
 }
 
-double similarity(String a, String b) {
+/// helper function to prep data for levenshtein distance calculation
+double _calcSimilarity(String a, String b) {
   double _similarity;
   a = a.toUpperCase();
   b = b.toUpperCase();
-  _similarity = 1 - levenshtein(a, b) / (max(a.length, b.length));
+  _similarity = 1 - _distanceBetweenStrings(a, b) / (max(a.length, b.length));
   return (_similarity);
 }
