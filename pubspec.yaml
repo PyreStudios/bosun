@@ -1,6 +1,6 @@
 name: bosun
 description: A library for parsing CLI input and structuring CLI commands
-version: 0.1.0
+version: 0.2.0
 repository: https://www.github.com/pyrestudios/bosun
 
 environment:
