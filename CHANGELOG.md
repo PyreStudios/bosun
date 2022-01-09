@@ -1,3 +1,6 @@
+## 0.2.0
+- Add support for suggesting similar commands when an incorrect one is used.
+
 ## 0.1.0
 - Add supportedFlags Command property
 - Documentation around the Command class.

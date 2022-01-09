@@ -1,5 +1,6 @@
 import 'package:bosun/src/command_executor.dart';
 import 'package:bosun/src/command.dart';
+import 'package:bosun/src/did_you_mean.dart';
 import 'package:bosun/src/commands.dart';
 
 class CommandParser {
@@ -19,17 +20,25 @@ class CommandParser {
 
       index++;
 
-      finalCmd = finalCmd.subcommands!
-          .firstWhere((element) => element.getAllLogicalNames().contains(cmd), orElse: () => _exceptionHandler(command, finalCmd, cmd));
+      finalCmd = finalCmd.subcommands!.firstWhere(
+          (element) => element.getAllLogicalNames().contains(cmd),
+          orElse: () => _exceptionHandler(command, finalCmd, cmd));
     }
 
     return ProcessableCommand(finalCmd, flags, arguments);
   }
 
-  static Command _exceptionHandler(Command root, Command context, String subcommand) {
+  static Command _exceptionHandler(
+      Command root, Command context, String subcommand) {
     var bosunCommand = BosunCmd(root, context);
-    // Eventually we will inspect the arguments here to see if we can suggest a command
-    return bosunCommand.subcommands!.firstWhere((element) => element.getAllLogicalNames().contains(subcommand), orElse: () => HelpCmd(root, context));
+
+    if (context.subcommands != null && context.subcommands!.isNotEmpty) {
+      return DidYouMeanCommand(input: subcommand, commandToSearch: root);
+    }
+
+    return bosunCommand.subcommands!.firstWhere(
+        (element) => element.getAllLogicalNames().contains(subcommand),
+        orElse: () => HelpCmd(root, context));
   }
 
   static Map<String, dynamic> _getFlags(List<String> args) {

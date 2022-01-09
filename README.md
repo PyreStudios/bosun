@@ -6,7 +6,7 @@
 
 - Structure CLI commands in a nice, uniform fashion.
 - Parse args and flag information from a command tree.
-- [EVENTUALLY] auto generate meaningful output when nonsensical commands are ran.
+- Auto generate meaningful output when nonsensical commands are ran.
 - [EVENTUALLY] meaningful feature suggestions from **you**!
 
 ## Getting started

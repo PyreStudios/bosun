@@ -1,14 +1,14 @@
 name: bosun
 description: A library for parsing CLI input and structuring CLI commands
-version: 0.1.0
+version: 0.2.0
 repository: https://www.github.com/pyrestudios/bosun
 
 environment:
   sdk: '>=2.15.0 <3.0.0'
 
 
-# dependencies:
-#   path: ^1.8.0
+dependencies: 
+  tree_iterator: ^2.0.0
 
 dev_dependencies:
   lints: ^1.0.0
