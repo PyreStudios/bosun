@@ -41,5 +41,10 @@ void main() {
       var args2 = 'runk app nested --bar=baz'.split(' ');
       execute(BosunCommand('donker', subcommands: [RunCmd()]), args2);
     });
+
+    test('Suggests help command when no similar commands', () {
+      var args2 = 'runk app nested --bar=baz'.split(' ');
+      execute(BosunCommand('donker', subcommands: []), args2);
+    });
   });
 }

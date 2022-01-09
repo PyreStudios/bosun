@@ -71,8 +71,8 @@ supported flags:''');
 /// execute method to process and execute the command.
 /// See the example folder in the Bosun repo for more information.
 class BosunCommand extends Command {
-  BosunCommand(String appName, {required List<Command> subcommands})
-      : super(command: appName, subcommands: subcommands);
+  BosunCommand(String appName, {String description = '', required List<Command> subcommands})
+      : super(command: appName, description: description, subcommands: subcommands);
 
   @override
   void run(List<String> args, Map<String, dynamic> flags) {

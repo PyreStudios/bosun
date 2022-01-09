@@ -11,7 +11,7 @@
 
 ## Getting started
 
-Add Bosun to your dependencies. See example for more information. Additional information coming soon.
+Add Bosun to your dependencies. See example (or usage below) for more information. Additional information coming soon.
 
 ## Usage
 

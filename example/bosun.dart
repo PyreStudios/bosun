@@ -23,5 +23,5 @@ class RunCmd extends Command {
 }
 
 void main(List<String> args) {
-  execute(BosunCommand('donker', subcommands: [RunCmd()]), args);
+  execute(BosunCommand('donker', description: 'The donker CLI tool', subcommands: [RunCmd()]), args);
 }
