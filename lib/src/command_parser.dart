@@ -1,5 +1,6 @@
 import 'package:bosun/src/command_executor.dart';
 import 'package:bosun/src/command.dart';
+import 'package:bosun/src/did_you_mean.dart';
 
 class CommandParser {
   static ProcessableCommand parse(Command command, List<String> args) {
@@ -18,8 +19,10 @@ class CommandParser {
 
       index++;
 
-      finalCmd = finalCmd.subcommands!
-          .firstWhere((element) => element.getAllLogicalNames().contains(cmd));
+      finalCmd = finalCmd.subcommands!.firstWhere(
+          (element) => element.getAllLogicalNames().contains(cmd),
+          orElse: () =>
+              DidYouMeanCommand(input: cmd, commandToSearch: command));
     }
 
     return ProcessableCommand(finalCmd, flags, arguments);

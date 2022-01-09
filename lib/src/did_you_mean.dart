@@ -10,11 +10,28 @@ class _WordSimilarity {
   const _WordSimilarity(this.text, this.similarity);
 }
 
+class DidYouMeanCommand extends Command {
+  String input;
+  Command commandToSearch;
+
+  DidYouMeanCommand({required this.input, required this.commandToSearch})
+      : super(command: 'did-you-mean');
+
+  @override
+  void run(List<String> args, Map<String, dynamic> flags) {
+    var suggested = _didYouMean(input, commandToSearch);
+    print(''''
+    No command found that matches $input. Did you mean:
+    $suggested?
+''');
+  }
+}
+
 /// didYouMean is a function that takes a BosunCommand and a string and returns
 /// the word in the command tree that is most similar to the string.
 /// We factor in all logical names for any given command so aliases and shorthands
 /// are considered, too!
-String didYouMean(String text, BosunCommand command) {
+String _didYouMean(String text, Command command) {
   var suggestions = [];
   traverseTree(command, (Command cmd) => cmd.subcommands ?? <Command>[],
       (Command node) {
