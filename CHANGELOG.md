@@ -1,3 +1,6 @@
+## 0.2.1
+- Add support for root commands with a processable body while supporting sub-commands off of that root.
+
 ## 0.2.0
 - Add support for suggesting similar commands when an incorrect one is used.
 

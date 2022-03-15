@@ -16,4 +16,18 @@ class ProcessableCommand {
   List<String> args;
 
   ProcessableCommand(this.command, this.flags, this.args);
+
+  @override
+  String toString() {
+    return '''
+  Command:
+  ${command.toString()}
+
+  Flags:
+  ${flags.toString()}
+
+  Args:
+  ${args.toString()}
+  ''';
+  }
 }

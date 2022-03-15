@@ -11,18 +11,32 @@ class CommandParser {
     var finalCmd = command;
     var arguments = <String>[];
     var index = 0;
+
+    Command? previousCommand = command;
     for (var cmd in subcommands) {
       // If no more subcommands then the rest must be args
-      if (finalCmd.subcommands == null) {
+      // alternatively, if the previous commands are not the same AND
+      // the subcommands exist but with no matches, those are args.
+      if (finalCmd.subcommands == null ||
+          finalCmd.subcommands!.isEmpty ||
+          (!finalCmd.subcommands!
+                  .map((e) => e.getAllLogicalNames())
+                  .expand((e) => e)
+                  .contains(cmd) &&
+              previousCommand != finalCmd)) {
         arguments.addAll(subcommands.toList().sublist(index));
         break;
       }
 
       index++;
 
+      previousCommand = finalCmd;
+
       finalCmd = finalCmd.subcommands!.firstWhere(
           (element) => element.getAllLogicalNames().contains(cmd),
-          orElse: () => _exceptionHandler(command, finalCmd, cmd));
+          orElse: () => finalCmd == command
+              ? _exceptionHandler(command, finalCmd, cmd)
+              : finalCmd);
     }
 
     return ProcessableCommand(finalCmd, flags, arguments);
@@ -36,6 +50,8 @@ class CommandParser {
       return DidYouMeanCommand(input: subcommand, commandToSearch: root);
     }
 
+    // TODO: I believe the auto-generated "help" command is unreachable
+    // subcommands are null or empty
     return bosunCommand.subcommands!.firstWhere(
         (element) => element.getAllLogicalNames().contains(subcommand),
         orElse: () => HelpCmd(root, context));
