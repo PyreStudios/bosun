@@ -1,10 +1,10 @@
-name: CI
+name: Dart CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -12,11 +12,20 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image:  google/dart:latest
+      image:  dart:latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: pub get
+      run: dart pub get
     - name: Run tests
-      run: pub run test
+      run: dart pub run test --coverage="coverage"
+    - name: Install coverage tools
+      run: dart pub global activate coverage
+    - name: format coverage
+      run: $HOME/.pub-cache/bin/format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.packages --report-on=lib
+    - uses: codecov/codecov-action@v2
+      with:
+        files: coverage.lcov
+        verbose: true # optional (default = false)
+
