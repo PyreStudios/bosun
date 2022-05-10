@@ -2,6 +2,12 @@
 
 ## A library for parsing CLI input and structuring CLI commands
 
+[![pub version](https://img.shields.io/pub/v/bosun)](https://img.shields.io/pub/v/bosun)
+[![codecov](https://codecov.io/gh/PyreStudios/bosun/branch/main/graph/badge.svg?token=CAK5MR60ZI)](https://codecov.io/gh/PyreStudios/bosun)
+[![points](https://img.shields.io/pub/points/bosun)](https://img.shields.io/pub/points/bosun)
+[![likes](https://img.shields.io/pub/points/bosun)](https://img.shields.io/pub/points/bosun)
+
+
 ## Features
 
 - Structure CLI commands in a nice, uniform fashion.
