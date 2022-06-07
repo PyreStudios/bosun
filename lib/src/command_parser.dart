@@ -3,13 +3,15 @@ import 'package:bosun/src/command.dart';
 import 'package:bosun/src/did_you_mean.dart';
 import 'package:bosun/src/commands.dart';
 
+/// CommandParser is responsible for parsing command line arguments and a command tree.
 class CommandParser {
+  /// Parse command line Arguments and a command tree and return a ProcessableCommand.
   static ProcessableCommand parse(Command command, List<String> args) {
     Map<String, dynamic> flags = _getFlags(args);
-    var subcommands =
+    final subcommands =
         args.sublist(0).where((element) => !element.startsWith('-'));
     var finalCmd = command;
-    var arguments = <String>[];
+    final arguments = <String>[];
     var index = 0;
 
     Command? previousCommand = command;
@@ -28,10 +30,13 @@ class CommandParser {
         break;
       }
 
+      // increment the current index to keep track of where we should sublist the arguments
       index++;
-
+      // store this iteration of hte final command as the previous command
       previousCommand = finalCmd;
 
+      // set finalCmd equal to the next command in the list, defaulting to one of our exception handlers
+      // in case we dont find a match.
       finalCmd = finalCmd.subcommands!.firstWhere(
           (element) => element.getAllLogicalNames().contains(cmd),
           orElse: () => finalCmd == command
@@ -44,7 +49,7 @@ class CommandParser {
 
   static Command _exceptionHandler(
       Command root, Command context, String subcommand) {
-    var bosunCommand = BosunCmd(root, context);
+    var bosunCommand = HelpCmd(root, context);
 
     if (context.subcommands != null && context.subcommands!.isNotEmpty) {
       return DidYouMeanCommand(input: subcommand, commandToSearch: root);

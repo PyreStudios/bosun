@@ -1,6 +1,9 @@
 import 'command.dart';
 
+/// The CommandExecutor is responsible for executing commands.
 class CommandExecutor {
+  /// Execute a given ProcessableCommand.
+  /// Will run printHelp on the command if the help flag is provided.
   static void execute(ProcessableCommand pCmd) {
     if (pCmd.flags['help'] == true) {
       pCmd.command.printHelp();

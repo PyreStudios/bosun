@@ -1,6 +1,5 @@
 import 'package:bosun/bosun.dart';
 import 'package:bosun/src/command.dart';
-import 'package:bosun/src/commands.dart';
 import 'package:bosun/src/did_you_mean.dart';
 import 'package:test/test.dart';
 import 'package:bosun/src/command_parser.dart';

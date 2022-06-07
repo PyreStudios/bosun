@@ -10,6 +10,8 @@ class _WordSimilarity {
   const _WordSimilarity(this.text, this.similarity);
 }
 
+/// DidYouMeanCommand is provided by Bosun and is used in the command tree for
+/// suggesting similar commands when the user inputs a command that is not found.
 class DidYouMeanCommand extends Command {
   String input;
   Command commandToSearch;
