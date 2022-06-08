@@ -1,3 +1,5 @@
+import 'package:bosun/src/commands.dart';
+
 /// Command is an abstract class that defines the interface for a command.
 /// Your CLI commands will extend Command and fill out the details that they provide.
 /// Additionally, you'll have to override the run method of the command.
@@ -34,7 +36,9 @@ abstract class Command {
       this.supportedFlags});
 
   /// Run defines what code should be ran when this command is executed.
-  void run(List<String> args, Map<String, dynamic> flags);
+  void run(List<String> args, Map<String, dynamic> flags) {
+    NodeHelpCmd(this).run(args, flags);
+  }
 
   /// PreRun defines what code should be ran before the command is executed.
   /// Consider using this to set things up before the command is run.

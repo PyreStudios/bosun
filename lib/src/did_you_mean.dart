@@ -22,7 +22,7 @@ class DidYouMeanCommand extends Command {
   @override
   void run(List<String> args, Map<String, dynamic> flags) {
     var suggested = _didYouMean(input, commandToSearch);
-    print(''''
+    print('''
     No command found that matches $input. Did you mean:
     $suggested?
 ''');

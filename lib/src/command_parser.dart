@@ -6,15 +6,21 @@ import 'package:bosun/src/commands.dart';
 /// CommandParser is responsible for parsing command line arguments and a command tree.
 class CommandParser {
   /// Parse command line Arguments and a command tree and return a ProcessableCommand.
-  static ProcessableCommand parse(Command command, List<String> args) {
+  static ProcessableCommand parse(Command rootCommand, List<String> args) {
     Map<String, dynamic> flags = _getFlags(args);
     final subcommands =
         args.sublist(0).where((element) => !element.startsWith('-'));
-    var finalCmd = command;
+    var finalCmd = rootCommand;
     final arguments = <String>[];
     var index = 0;
 
-    Command? previousCommand = command;
+    if (subcommands.isNotEmpty &&
+        rootCommand.subcommands != null &&
+        rootCommand.subcommands!.isEmpty) {
+      return ProcessableCommand(NodeHelpCmd(rootCommand), flags, arguments);
+    }
+
+    Command? previousCommand = rootCommand;
     for (var cmd in subcommands) {
       // If no more subcommands then the rest must be args
       // alternatively, if the previous commands are not the same AND
@@ -39,27 +45,12 @@ class CommandParser {
       // in case we dont find a match.
       finalCmd = finalCmd.subcommands!.firstWhere(
           (element) => element.getAllLogicalNames().contains(cmd),
-          orElse: () => finalCmd == command
-              ? _exceptionHandler(command, finalCmd, cmd)
+          orElse: () => finalCmd == rootCommand
+              ? DidYouMeanCommand(input: cmd, commandToSearch: rootCommand)
               : finalCmd);
     }
 
     return ProcessableCommand(finalCmd, flags, arguments);
-  }
-
-  static Command _exceptionHandler(
-      Command root, Command context, String subcommand) {
-    var bosunCommand = HelpCmd(root, context);
-
-    if (context.subcommands != null && context.subcommands!.isNotEmpty) {
-      return DidYouMeanCommand(input: subcommand, commandToSearch: root);
-    }
-
-    // TODO: I believe the auto-generated "help" command is unreachable
-    // subcommands are null or empty
-    return bosunCommand.subcommands!.firstWhere(
-        (element) => element.getAllLogicalNames().contains(subcommand),
-        orElse: () => HelpCmd(root, context));
   }
 
   static Map<String, dynamic> _getFlags(List<String> args) {
