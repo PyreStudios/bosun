@@ -1,3 +1,6 @@
+## 0.2.2
+- Adjusted how help commands are generated.
+
 ## 0.2.1
 - Add support for root commands with a processable body while supporting sub-commands off of that root.
 
